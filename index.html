@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Tadaksahak Learning – Culture, langue, histoire</title>
+  <meta name="description" content="Plateforme Idaksahak : dictionnaire, histoire, médias, rapports, quiz…">
+  <meta name="theme-color" content="#005fa3">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <link rel="apple-touch-icon" href="images/idaksahak_square.png">
+  <link rel="manifest" href="manifest.webmanifest">
+  <link rel="icon" href="images/idaksahak_square.png" type="image/png">
+  <link rel="stylesheet" href="style.css">
+  <script src="https://cdn.jsdelivr.net/npm/fuse.js@6.6.2"></script>
+  <script src="data/mots_final_489.js"></script>
+  <script src="data/interface_langue.js"></script>
+  <script src="data/histoire.js"></script>
+  <script src="data/audios.js"></script>
+  <script src="data/photos.js"></script>
+  <script src="data/videos.js"></script>
+  <script src="data/docs.js"></script>
+  <script src="data/livres.js"></script>
+  <script src="data/quiz.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+  <script defer src="app.js"></script>
+</head>
+<body>
+  <noscript><div class="js-warning">⚠️ JavaScript nécessaire pour le fonctionnement.</div></noscript>
+
+  <header class="site-header">
+    <img src="images/idaksahak_round.png" alt="Logo Tadaksahak" class="logo-header" loading="lazy">
+    <h1>Tadaksahak Learning</h1>
+    <p>Culture, langue et histoire Idaksahak réunies</p>
+       
+<nav class="menu-deroulant">
+  <select id="sectionSelector" aria-label="Navigation principale">
+    <option value="accueil">🏠 Accueil</option>
+    <option value="dictionnaire">📖 Dictionnaire</option>
+    <option value="chat">💬 Chat</option>
+    <option value="audio">🎧 Albums</option>
+    <option value="photos">🖼️ Photos</option>
+    <option value="videos">🎥 Vidéos</option>
+    <option value="rapports">📄 Rapports</option>
+    <option value="actualites">📰 Actualités</option>
+    <option value="livres">📚 Livres</option>
+    <option value="quiz">❓ Quiz</option>
+  </select>
+</nav>
+  <main>
+    <section id="accueil" class="onglet-contenu">
+      <div class="hero">
+        <h2>Bienvenue sur Tadaksahak Learning</h2>
+        <p>Un espace pour explorer la langue, la culture et l’histoire Idaksahak.</p>
+        <a class="btn" data-tab-link="dictionnaire">Accéder au dictionnaire 📖</a>
+      </div>
+       <div class="bio-container">
+  <img src="images/hamadine_bio.jpg" alt="Hamadine Ag Moctar" class="bio-photo" loading="lazy">
+  <div class="bio-text">
+    <p><strong>Je m'appelle Hamadine Ag Moctar.</strong><br>
+    Interprète multilingue, conteur, développeur autodidacte… et survivant.</p>
+
+    <p>Né au cœur du Sahel, j’ai traversé les frontières, les langues, les conflits et les silences.<br>
+    Plus qu’un traducteur, je suis un passeur de mémoire, de paix et de savoirs.</p>
+
+    <p>Je conçois des plateformes éducatives, des dictionnaires interactifs, des projets multilingues et des outils web adaptés aux besoins communautaires.  
+    Passionné par la <strong>technologie au service de l'humain</strong>, je maîtrise HTML, CSS, JavaScript, GitHub Pages, progressive web apps (PWA), IA et interfaces multilingues intelligentes.</p>
+
+    <p>À travers ce site, je vous invite à découvrir <strong>la langue Tadaksahak</strong>, notre culture, nos histoires, nos chansons.<br>
+    Ce n’est pas qu’un dictionnaire. C’est une mémoire vivante, un pont entre les peuples.</p>
+
+    <p><em>Un bras perdu, mais une voix debout. Et une mission : connecter nos mondes.</em><br>
+    Bienvenue dans mon univers numérique et saharien.</p>
+
+    <p>
+  <a href="https://www.linkedin.com/in/hamadine-moctar-002059294?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app" target="_blank" class="linkedin-button">
+    🔗 Voir mon profil LinkedIn
+  </a>
+    </p>
+ </div>
+    </section>
+
+    <section id="dictionnaire" class="onglet-contenu" hidden>
+      <h2>📖 Dictionnaire Tadaksahak</h2>
+      <div class="search-bar">
+        <label for="searchBar" class="visually-hidden">Recherche de mot</label>
+        <input id="searchBar" placeholder="Recherchez un mot…" aria-label="Recherche dans le dictionnaire">
+      </div>
+      <div class="mot-resultat">
+        <h3 id="motTexte">—</h3>
+        <p id="definition">—</p>
+        <p id="compteur">0 / 0</p>
+      </div>
+      <div class="button-group">
+        <button id="btnPlay">🔊</button>
+        <button id="btnPrononcer">🎤</button>
+        <button id="btnReplay" disabled>🔁</button>
+        <button id="btnAuto" disabled>▶️</button>
+      </div>
+      <div class="button-group">
+        <button id="btnPrev">⟸ Précédent</button>
+        <button id="btnNext">Suivant ➡️</button>
+      </div>
+      <div id="messageStatus" class="status" hidden></div>
+    </section>
+
+    <section id="chat" class="onglet-contenu" hidden>
+      <h2 id="chat-title">💬 Chat Tadaksahak</h2>
+      <div id="chatWindow" class="chatbox" role="log" aria-live="polite"></div>
+      <div id="botIntro">🤖 Salut, je suis Hamadine.</div>
+      <div class="chat-input">
+        <input id="chatInput" placeholder="Écrivez votre message…" aria-label="Zone de saisie du chat">
+        <button id="btnEnvoyer" aria-label="Envoyer le message">Envoyer</button>
+      </div>
+    </section>
+
+    <section id="audio" class="onglet-contenu" hidden>
+      <h2>🎧 Albums Hamadine</h2>
+      <div id="audioContainer"></div>
+    </section>
+
+    <section id="photos" class="onglet-contenu" hidden>
+      <h2>🖼️ Galerie</h2>
+      <div id="photosContainer" class="grid"></div>
+    </section>
+
+    <section id="videos" class="onglet-contenu" hidden>
+      <h2>🎥 Vidéos</h2>
+      <label for="filtreVideos">Trier :</label>
+      <select id="filtreVideos"><option value="nouveau">Récentes</option><option value="ancien">Anciennes</option></select>
+      <div id="videosContainer" class="grid"></div>
+    </section>
+
+    <section id="rapports" class="onglet-contenu" hidden>
+      <h2>📄 Rapports & Études</h2>
+      <ul>
+        <li><a href="rapports_idaksahak.html">Rapports Idaksahak</a></li>
+        <li><a href="rapports_complementaires.html">Rapports complémentaires</a></li>
+      </ul>
+      <div id="rapportsContainer"></div>
+    </section>
+
+    <section id="actualites" class="onglet-contenu" hidden>
+      <h2>📰 Actualités</h2>
+      <ul>
+        <li><a href="communiques_idaksahak.html">Communiqués Idaksahak</a></li>
+        <li><a href="communiques_msa.html">Communiqués MSA</a></li>
+      </ul>
+      <div id="newsContainer"></div>
+      <article class="actualite">
+  <h3>🌍 Première initiative solidaire du Bureau des Jeunes Idaksahak à Gao</h3>
+  <p><strong>Gao, 7 août 2025 —</strong> À peine installé, le tout nouveau Bureau des jeunes Idaksahak de Gao lance un signal fort en faveur des déplacés de Ménaka réfugiés à Gao.</p>
+
+  <div class="galerie-actualite">
+    <img src="images/WhatsApp-Image-2025-08-07-a-11.57.16_fa38ce4b.jpg" alt="Distribution à Gao">
+    <img src="images/WhatsApp-Image-2025-08-07-a-11.57.21_c78289a1-1536x864.jpg" alt="Soutien aux déplacés">
+    <img src="images/WhatsApp-Image-2025-08-07-a-11.57.18_043e01e2.jpg" alt="Jeunes Idaksahak solidaires">
+    <img src="images/45-768x432.jpg" alt="Aide humanitaire à Gao">
+  </div>
+
+  <p>Dès les premières heures de leur mandat, ces jeunes engagés ont organisé une <strong>distribution de vivres, d’articles essentiels et de produits de première nécessité</strong> à plusieurs familles en situation de grande précarité. Ce geste humanitaire illustre une volonté claire : <em>agir concrètement, là où le besoin est le plus pressant</em>.</p>
+
+  <p>Au-delà de l’aide matérielle, cette action symbolise <strong>le réveil d’une jeunesse responsable</strong>, consciente de son rôle dans la reconstruction sociale et la cohésion communautaire. Elle marque le début d’une nouvelle dynamique, portée par les valeurs d’<strong>unité, de dignité et de solidarité</strong>.</p>
+
+  <p>En posant cet acte dès le départ, le Bureau trace une ligne claire : <em>celle d’un engagement citoyen au service des siens</em>.</p>
+
+  <p><em>Un exemple inspirant à suivre.</em></p>
+
+  <!-- BOUTON DE PARTAGE (DOIT ÊTRE DANS L'ARTICLE) -->
+  <div class="share-buttons">
+    <span>Partager :</span>
+    <a class="share-btn whatsapp" href="#" title="Partager sur WhatsApp" target="_blank">WhatsApp</a>
+    <a class="share-btn facebook" href="#" title="Partager sur Facebook" target="_blank">Facebook</a>
+    <a class="share-btn twitter" href="#" title="Partager sur Twitter" target="_blank">Twitter</a>
+    <a class="share-btn linkedin" href="#" title="Partager sur LinkedIn" target="_blank">LinkedIn</a>
+    <a class="share-btn email" href="#" title="Partager par email" target="_blank">Email</a>
+  </div>
+      </article>
+    </section>
+
+    <section id="livres" class="onglet-contenu" hidden>
+      <h2>📚 Livres et études</h2>
+      <div class="grid two-columns">
+        <div>
+          <h3>Études linguistiques & culturelles</h3>
+          <ul>
+            <li><a href="cours-anglais.html">Cours d’Anglais</a></li>
+            <li><a href="Introduction-Tadaksahak.html">Introduction Tadaksahak</a></li>
+            <li><a href="contribution-to-the-knowledge-of-the-idaksahak-community.html">Contribution (ENG)</a></li>
+            <li><a href="CONTRIBUTION-A-LA-CONNAISSANCE-DE-LA-COMMUNAUTE-IDAKSAHAK.html">Contribution Idaksahak (FR)</a></li>
+            <li><a href="Contribution à la connaissance de la communauté Idakssahak par le Géologue Ahmed-Mohamed AG GUIDI - Texte Intégral.html">Texte Géologue AG GUIDI</a></li>
+          </ul>
+        </div>
+        <div>
+          <h3>Histoire & témoignages</h3>
+          <ul>
+            <li><a href="histoire-emancipation.html">Histoire émancipation (Résumé)</a></li>
+            <li><a href="histoire-emancipation-integrale.html">Histoire émancipation (Intégral)</a></li>
+            <li><a href="تاريخ-التحرر-الكامل-العربية.html">التحرر الكامل (arabe)</a></li>
+            <li><a href="مساهمة-في-معرفة-مجتمع-الإداكساهك.html">مساهمة مجتمع الإداكساهك (arabe)</a></li>
+          </ul>
+        </div>
+      </div>
+      <label for="rechercheLivres" class="visually-hidden">Recherche de livres</label>
+      <input id="rechercheLivres" placeholder="Rechercher un livre…" aria-label="Recherche dans les livres">
+      <label for="selectThemeLivres">Filtrer par thème :</label>
+      <select id="selectThemeLivres">
+        <option value="">Tous</option>
+        <option value="linguistique">Linguistique</option>
+        <option value="histoire">Histoire</option>
+      </select>
+      <div id="livresContainer"></div>
+    </section>
+
+  </main>
+<script>
+  document.addEventListener("DOMContentLoaded", () => {
+    const select = document.getElementById('sectionSelector');
+    const sections = document.querySelectorAll('main > section');
+
+    function afficherSection(id) {
+      sections.forEach(sec => sec.hidden = sec.id !== id);
+      localStorage.setItem('lastSection', id);
+    }
+
+    if (select) {
+      select.addEventListener('change', () => {
+        afficherSection(select.value);
+      });
+
+      const last = localStorage.getItem('lastSection') || 'accueil';
+      select.value = last;
+      afficherSection(last);
+    }
+
+    // ✅ DANS le DOMContentLoaded
+    document.querySelectorAll('.share-buttons').forEach(section => {
+      const pageURL = encodeURIComponent(window.location.href);
+      const pageTitle = encodeURIComponent(document.title);
+
+      section.querySelector('.whatsapp').href = `https://wa.me/?text=${pageTitle}%20${pageURL}`;
+      section.querySelector('.facebook').href = `https://www.facebook.com/sharer/sharer.php?u=${pageURL}`;
+      section.querySelector('.twitter').href = `https://twitter.com/intent/tweet?text=${pageTitle}&url=${pageURL}`;
+      section.querySelector('.linkedin').href = `https://www.linkedin.com/sharing/share-offsite/?url=${pageURL}`;
+      section.querySelector('.email').href = `mailto:?subject=${pageTitle}&body=Voici un lien intéressant : ${pageURL}`;
+    });
+  });
+</script>
+
+ 
+  <button id="toggleChatBot" class="floating-chat-btn">💬</button>
+
+  <footer>
+    <p>© 2025 Tadaksahak Learning — Tous droits réservés</p>
+    <p><a href="offline.html">Accès hors-ligne / Offline mode</a></p>
+  </footer>
+</body>
+</html>
