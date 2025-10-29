@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Émancipation politique des Idaksahak</title>
+  <link rel="icon" href="images/idaksahak_round.png" type="image/png" />
+  <link rel="manifest" href="manifest.webmanifest" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body class="livre-page" data-theme="clair">
+  <noscript>
+    <p style="text-align:center; color:red; font-weight:bold;">⚠️ Ce site nécessite JavaScript pour fonctionner correctement.</p>
+  </noscript>
+
+  <header class="site-header">
+    <div class="header-wrapper">
+      <img src="images/idaksahak_round.png" alt="Logo Tadaksahak" class="logo-header" loading="lazy" width="100" height="100" />
+    </div>
+  </header>
+
+  <!-- === Section Intro === -->
+  <section id="intro">
+    <h2><strong>Contribution à la connaissance de la communauté Idaksahak</strong></h2>
+    <p><strong>Par Ahmed Mohamed Ag Guidi</strong></p>
+    <p><strong>Ingénieur Géologue</strong> à la retraite, ancien cadre du Ministère des Mines, de l'Énergie et de l’Eau du Mali, membre de la communauté <strong>Idaksahak</strong>.</p>
+
+    <h3><strong>Introduction</strong></h3>
+    <p>La présente note, sans être une étude approfondie sur la communauté <strong>Idaksahak</strong>, essaie de faire connaître à travers une présentation succincte les principales caractéristiques de cette communauté...</p>
+
+    <h3><strong>Étymologie du mot "Idaksahak"</strong></h3>
+    <p>L’appellation <strong>IDAKSAHAK</strong> que se donne la communauté...</p>
+    <blockquote>Il peut s’agir donc d’une référence au nom d’un roi...</blockquote>
+    <p>Bien entendu, l’appellation <strong>IDD-AGG</strong> ("fils de" en tamasheq)...</p>
+    <blockquote>Dans cet ordre d’idée <strong>DAWSAHAK</strong> est une formulation...</blockquote>
+    <p>Dans tous les cas, l’occasion est saisie pour une propension à vouloir faire un rapprochement avec le nom <strong>Is-haq</strong> du <strong>Coran</strong>...</p>
+  </section>
+
+  <!-- === Section Origine === -->
+  <section id="histoire-origine">
+    <h3><strong>Origine géographique et historique</strong></h3>
+    <p>Les <strong>Idaksahak</strong> retiennent en mémoire leur déplacement à partir de <strong>Tafilalet</strong> (sud <strong>Maroc</strong>) via <strong>Tombouctou</strong>...</p>
+  </section>
+
+  <!-- === Section Culture === -->
+  <section id="langue-culture">
+    <h3><strong>Langue, culture et religion</strong></h3>
+    <p>La langue des <strong>Idaksahak</strong>, le <strong>tadaksahak</strong>, est un idiome mixte issu...</p>
+    <blockquote>“Le tandem <strong>savoir religieux</strong> et <strong>puissance économique</strong>...”</blockquote>
+    <p>Cette importance de la religion se manifeste dans les choix éducatifs...</p>
+  </section>
+
+  <!-- === Section Politique === -->
+  <section id="histoire-politique">
+    <h3><strong>Histoire contemporaine et affirmation politique</strong></h3>
+    <p>Longtemps perçus comme une <strong>communauté pacifique</strong>, les <strong>Idaksahak</strong> ont vu leur position évoluer...</p>
+    <blockquote>“Les membres d’une tribu, de par leurs liens de sang...”</blockquote>
+    <p>Les conflits récents ont mis en lumière la diversité des trajectoires...</p>
+  </section>
+
+  <!-- === Section Références === -->
+  <section id="references-bibliographiques">
+    <h3><strong>Références bibliographiques</strong></h3>
+    <ul>
+      <li><strong>Ag Guidi, A. M.</strong> (2019)...</li>
+      <li><strong>Barth, H.</strong> (1858)...</li>
+      <li><strong>Ben Hounet, Y.</strong> (2009)...</li>
+      <li><strong>Boilley, P.</strong> (1999)...</li>
+      <li><strong>Grémont, C.</strong> (2010)...</li>
+      <li><strong>Lecoq, B.</strong> (2010)...</li>
+      <!-- (autres références...) -->
+    </ul>
+  </section>
+
+  <!-- === Bouton retour + Sélecteur de thème === -->
+  <div class="retour" style="text-align:center; margin-top:2em;">
+    <a class="button read-btn" href="#top">⬆ Retour en haut</a>
+  </div>
+
+  <div style="text-align:center; margin-top:1em;">
+    <label for="themeSelect"><strong>🎨 Thème visuel :</strong></label>
+    <select id="themeSelect">
+      <option value="clair">Clair</option>
+      <option value="vert">Vert</option>
+      <option value="sombre">Sombre</option>
+    </select>
+  </div>
+
+  <script>
+    const select = document.getElementById('themeSelect');
+    const body = document.body;
+    const saved = localStorage.getItem('themeLivre');
+    if (saved) {
+      body.setAttribute('data-theme', saved);
+      select.value = saved;
+    }
+    select.onchange = e => {
+      const val = e.target.value;
+      body.setAttribute('data-theme', val);
+      localStorage.setItem('themeLivre', val);
+    };
+  </script>
+</body>
+</html>
